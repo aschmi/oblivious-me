@@ -4,7 +4,7 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @notes = Note.find(:all, order: 'created_at DESC')
     @note = Note.new
   end
 
@@ -41,8 +41,7 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to notes_path, notice: 'Note was successfully updated.' }
       else
         format.html { render action: 'edit' }
         format.json { render json: @note.errors, status: :unprocessable_entity }
