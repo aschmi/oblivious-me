@@ -33,6 +33,8 @@ group :doc do
 end
 
 gem 'zurb-foundation'
+gem 'haml'
+gem 'simple_form'
 
 
 # Use ActiveModel has_secure_password
