@@ -47,8 +47,9 @@
 
   </section>
 </nav>
+    <div class="row">
+      <div class="small-12 large-12 columns">
     <% if notice %>
-
     <div data-alert class="alert-box success">
       <!-- Your content goes here -->
       <%= notice %>
@@ -65,6 +66,8 @@
 
     <%= yield %>
 
+  </div>
+  </div>
     
     <%= javascript_include_tag "application" %>
   </body>
