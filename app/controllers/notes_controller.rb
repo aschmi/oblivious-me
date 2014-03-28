@@ -5,8 +5,48 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = current_user.notes
+    #@notes = current_user.notes
+    # @note = Note.new
+
+    # @tags = current_user.owned_tags
+
+    if params[:id]
+      (session[:selected_tags] ||= []) << params[:id]
+    elsif params[:remove_id] && session[:selected_tags] && !session[:selected_tags].empty?
+      session[:selected_tags].delete(params[:remove_id])
+    end
+
+    if !session[:selected_tags].nil?
+      @selected_tags = ActsAsTaggableOn::Tag.find(session[:selected_tags])
+    else
+      @selected_tags = []
+    end
+
+    # @notes = Note.tagged_with(@selected_tags)
+
     @note = Note.new
+
+    #@tags = current_user.notes.tags
+
+
+    #@notes = current_user.notes
+    if @selected_tags.empty?
+      @tags = current_user.owned_tags
+      @notes = current_user.notes
+    else
+      @notes = Note.tagged_with(@selected_tags, owned_by: current_user)
+      @tags = Set.new
+      @notes.map do |n|
+        n.taggings.map do |tagging|
+          @tags << ActsAsTaggableOn::Tag.find(tagging.tag_id)
+        end
+      end
+    end
+
+    # @notes.map do |n|
+    #   @tags << n.tags
+    # end
+    
   end
 
   # GET /notes/1
@@ -27,10 +67,11 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
-    @note.user = current_user
+    #@note.user = current_user
 
     respond_to do |format|
       if @note.save
+        current_user.tag(@note, with: note_tags(@note.content), on: :tags)
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
       else
         format.html { render action: 'new' }
@@ -69,6 +110,10 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:content)
+      params.require(:note).permit(:content).merge(user_id: current_user.id)
+    end
+
+    def note_tags(text)
+      text.scan(/#\S+/)
     end
 end

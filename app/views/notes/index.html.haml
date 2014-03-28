@@ -1,4 +1,18 @@
-#note-input-form
-  = render 'form'
-#notes-list
-  = render @notes
+.row 
+  .small-2.columns
+    #tags
+      - @tags.map do |tag|
+        .panel
+          =link_to tag.name, {controller: 'notes', action: 'index', id: tag.id }
+
+  .small-8.columns
+    #note-input-form
+      = render 'form'
+    #notes-list
+      = render @notes
+  .small-2.columns
+    #selected-tags
+      - @selected_tags.map do |sel_tag|
+        .panel
+          =link_to '×', {controller: 'notes', action: 'index', remove_id: sel_tag.id}
+          = sel_tag.name
