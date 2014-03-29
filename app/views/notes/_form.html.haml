@@ -1,5 +1,4 @@
-.panel 
-  = simple_form_for @note do |f| 
-    = f.input :header, label: false
-    = f.input :content, as: :text, label: false
-    = f.button :submit
+= simple_form_for @note do |f| 
+  = f.input :header, label: false
+  = f.input :content, as: :text, label: false
+  = f.button :submit, class: 'small radius'
