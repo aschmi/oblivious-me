@@ -1,4 +1,4 @@
 = simple_form_for @note do |f| 
-  = f.input :header, label: false
-  = f.input :content, as: :text, label: false
-  = f.button :submit, class: 'small radius'
+  = f.input :header, label: false, required: true, placeholder: 'Eine neue Notiz erstellen'
+  = f.input :content, as: :text, label: false, placeholder: 'Eine Detailbeschriebung eingeben (Optional)'
+  = f.button :submit, value: 'Notiz erstellen', class: 'small radius'
