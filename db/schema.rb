@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(version: 20140328171241) do
   enable_extension "plpgsql"
 
   create_table "notes", force: true do |t|
-    t.string   "content"
+    t.string   "header",     null: false
+    t.text     "content"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

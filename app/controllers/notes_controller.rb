@@ -71,7 +71,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        current_user.tag(@note, with: note_tags(@note.content), on: :tags)
+        current_user.tag(@note, with: note_tags(@note.header), on: :tags)
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
       else
         format.html { render action: 'new' }
@@ -110,7 +110,7 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:content).merge(user_id: current_user.id)
+      params.require(:note).permit(:header, :content).merge(user_id: current_user.id)
     end
 
     def note_tags(text)
