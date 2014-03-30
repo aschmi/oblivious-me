@@ -13,12 +13,48 @@
   margin-top: 15px
   padding: 10px
   background-color: #FAFAFA
-  box-shadow: 0px 2px 8px #AAA
+  position: relative
+  z-index: 1
+  //box-shadow: 0px 2px 8px #AAA
   border-radius: 5px
+  height: 100px
+  #new-note-header-input
+    position: absolute
+    top: 0px
+    border: none
+    height: 43px
+  #new-note-content-input
+    position: absolute
+    top: 45px
+    height: 0px
+    display: none
+    overflow: auto !important
+    border: none
+    border-top: 1px dashed #ccc
   .button
     margin-bottom: 0
   form
     margin-bottom: 0
+
+#ticket-new-input
+  background: #fff
+  border: 1px solid #ccc
+  position: relative
+  z-index: 1
+  height: 45px
+  input
+    position: absolute
+    top: 0px
+    border: none
+    height: 43px
+  textarea
+    position: absolute
+    top: 45px
+    height: 0px
+    display: none
+    overflow: auto !important
+    border: none
+    border-top: 1px dashed #ccc
 
 .notes-list-item
   display: block
@@ -31,5 +67,8 @@
   margin-bottom: 10px
   font-size: 14px
   box-shadow: 0px 2px 4px #AAA
+
+#note_content
+  display: none
 
 
