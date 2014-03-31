@@ -1,4 +1,4 @@
-= simple_form_for @note, remote: true do |f| 
-  = f.input :header, label: false, required: true, placeholder: 'Eine neue Notiz erstellen', tabindex: 1, id: 'new-note-header-input'
+= simple_form_for @note do |f| 
+  = f.input :header, label: false, required: true, placeholder: 'Eine neue Notiz erstellen', tabindex: 1, id: 'new-note-header-input', autofocus: true
   = f.input :content, as: :text, label: false, placeholder: 'Eine Detailbeschriebung eingeben (Optional)', tabindex: 2, id: 'new-note-content-input'
   = f.button :submit, value: 'Notiz erstellen', class: 'small radius'

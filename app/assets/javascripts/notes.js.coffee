@@ -5,23 +5,32 @@ $ ->
   ANIMATION_DURATION_CLOSE = 100
 
   $noteInputContainer = $ '#note-input-form'
+  $notesList = $ '#notes-list'
   $noteNewForm = $noteInputContainer.find 'form'
   $noteHeader = $ '#note_header'
   $noteContent = $ '#note_content'
   $noteSubmitButton = $noteInputContainer.find '.button'
 
-  $noteNewForm.on "ajax:success", (e, data, status, xhr) ->
+  $noteNewForm.on "ajaxSuccess", (e, data, status, xhr) ->
     $noteInputContainer.animate({height: SMALL_HEIGHT}, ANIMATION_DURATION_CLOSE)
     $noteContent.val('')
     $noteContent.height(0)
     $noteContent.css('display', 'none')
+    #debugger
+    $notesList.find('li').first().prepend(data.html)
+    alert "Yes!"
+
+  # $noteNewForm.on "ajax:error", (e, xhr, status) ->
+  #   alert xhr.responseText
+  #   $notesList.find('li').first().prepend(xhr.responseText)
+
 
   saveNewNote = ->
     $noteNewForm.submit()
 
   $noteHeader.on 'keydown', (e) ->
-  	if (e.ctrlKey || e.metaKey) && e.keyCode == 13
-  	  saveNewNote.call(@)
+    if (e.ctrlKey || e.metaKey) && e.keyCode == 13
+      saveNewNote.call()
     if !(e.ctrlKey || e.metaKey) && e.keyCode == 13 #=>KEY_CODES.ENTER
       e.preventDefault()
       $noteInputContainer.animate({height: BIG_HEIGHT}, ANIMATION_DURATION_OPEN, ->
@@ -31,7 +40,7 @@ $ ->
   
   $noteContent.on 'keydown', (e) ->
     if (e.ctrlKey || e.metaKey) && e.keyCode == 13
-      saveNewNote.call(@)
+      saveNewNote.call()
     if e.keyCode == 27 #=>KEY_CODES.ESCAPE
       $noteHeader.focus()
       $noteInputContainer.animate({height: SMALL_HEIGHT}, ANIMATION_DURATION_CLOSE)
