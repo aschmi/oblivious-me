@@ -39,6 +39,7 @@ gem 'simple_form'
 gem 'devise'
 
 gem 'acts-as-taggable-on'
+gem 'redcarpet'
 
 
 # Use ActiveModel has_secure_password

@@ -1,6 +1,6 @@
 %li.notes-list-item
   = content_tag :span, note.header, class: 'note-header'
-  = content_tag :div, note.content, class: 'note-content'
+  = markdown note.content 
 
   .note-actions
     = content_tag :span, "Erstellt: " + note.created_at.strftime("%d.%m.%Y %H:%M"), class: 'note-timestamp'
