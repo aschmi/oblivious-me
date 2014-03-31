@@ -43,6 +43,7 @@ class NotesController < ApplicationController
       end
     end
 
+    @notes = @notes.order("updated_at DESC")
     # @notes.map do |n|
     #   @tags << n.tags
     # end
