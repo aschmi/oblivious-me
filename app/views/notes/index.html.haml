@@ -1,5 +1,9 @@
 .row 
   .small-2.columns
+    %span.tag-header
+      Tags
+    %span.tag-filter-hint 
+      Auswählen zum Filtern
     %ul.side-nav
       - @tags.map do |tag|
         %li
@@ -12,6 +16,10 @@
       = render @notes
   .small-2.columns
     #selected-tags
+      %span.tag-header
+        Ausgewählte Tags
+      %span.tag-filter-hint 
+        Aufheben durch Klicken
       %ul.side-nav
         - @selected_tags.map do |sel_tag|
           %li

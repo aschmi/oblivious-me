@@ -1,5 +1,5 @@
 = simple_form_for @note do |f| 
-  = f.input :header, label: false, required: true, placeholder: 'Eine neue Notiz erstellen', tabindex: 1, id: 'new-note-header-input', autofocus: true
+  = f.input :header, label: false, required: true, placeholder: 'Eine neue Notiz erstellen (Tags werden mit #-Zeichen erzeugt)', tabindex: 1, id: 'new-note-header-input', autofocus: true
   = f.input :content, as: :text, label: false, placeholder: 'Eine Detailbeschriebung eingeben (Optional)', tabindex: 2, id: 'new-note-content-input'
   .row
     .small-9.column#note-input-hint

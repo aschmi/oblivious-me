@@ -1,4 +1,9 @@
 %li.notes-list-item
-  = note.header
-  = link_to 'Edit', edit_note_path(note)
-  = link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }
+  = content_tag :span, note.header, class: 'note-header'
+  = content_tag :div, note.content, class: 'note-content'
+
+  .note-actions
+    = content_tag :span, "Erstellt: " + note.created_at.strftime("%d.%m.%Y %H:%M"), class: 'note-timestamp'
+    = #content_tag :span, note.updated_at.strftime("%d.%m.%Y %H:%M"), class: 'note-timestamp'
+    = link_to 'Bearbeiten', edit_note_path(note), class: 'note-edit'
+    = link_to 'Löschen', note, method: :delete, data: { confirm: 'Soll die Notiz wirklich gelöscht werden?' }, class: 'note-delete'
