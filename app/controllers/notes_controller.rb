@@ -76,7 +76,7 @@ class NotesController < ApplicationController
         #format.js { render partial: 'notes/note', locals: {note: @note} }
         #format.js { render json: { html: { partial: render_to_string('notes/note', layout: false, locals: {note: @note })}, content_type: 'text/json'}}
         #format.json { render json: @note }
-        format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
+        format.html { redirect_to notes_path, notice: 'Notiz wurde erfolgreich erstellt' }
       else
         format.html { render action: 'new' }
       end
@@ -88,7 +88,8 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to notes_path, notice: 'Note was successfully updated.' }
+        current_user.tag(@note, with: note_tags(@note.header), on: :tags)
+        format.html { redirect_to notes_path, notice: 'Notiz wurde erfolgreich aktualisiert' }
       else
         format.html { render action: 'edit' }
         format.json { render json: @note.errors, status: :unprocessable_entity }
